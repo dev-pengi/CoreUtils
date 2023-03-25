@@ -1,0 +1,38 @@
+{
+  "name": "coreutils",
+  "version": "1.0.0",
+  "description": "\"CoreUtils is a powerful JavaScript utility library that provides a wide range of functions to simplify common programming tasks. From formatting data and working with arrays and objects to handling errors and randomizing data, CoreUtils offers a comprehensive set of tools that can help streamline your development process. Whether you're building a web application, mobile app, or any other project, CoreUtils can save you time and effort by providing reliable and efficient solutions. With its user-friendly API and extensive documentation, CoreUtils is an essential tool for any developer looking to improve their workflow and produce high-quality code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-pengi/CoreUtils.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "utility",
+    "library",
+    "format",
+    "validation",
+    "array",
+    "object",
+    "string",
+    "error",
+    "handling",
+    "randomization",
+    "development",
+    "productivity",
+    "efficiency",
+    "workflow",
+    "API",
+    "documentation"
+  ],
+  "author": "sif_mst",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-pengi/CoreUtils/issues"
+  },
+  "homepage": "https://github.com/dev-pengi/CoreUtils#readme"
+}
