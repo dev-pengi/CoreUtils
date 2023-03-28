@@ -1,3 +1,4 @@
+const moment = require('moment')
 
 /**
  * Converts a time string to milliseconds
