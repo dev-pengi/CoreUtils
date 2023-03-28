@@ -1,3 +1,4 @@
+
 /**
  * Converts a time string to milliseconds
  * @param {string} timeString - The time string to convert
@@ -58,11 +59,12 @@ const StringToMs = (timeString) => {
 /**
  * Converts a number of milliseconds to a human-readable time string
  * @param {number} milliseconds - The number of milliseconds to convert
+ * @param {string} [seperator=' ,'] - seperate between units
  * @returns {string} - The time string
  * @throws {Error} - If the input is not a number or is invalid
  */
 
-const MsToString = (milliseconds) => {
+const MsToString = (milliseconds, seperator = ', ') => {
     if (isNaN(milliseconds))
         throw new Error('The provided value is not a valid number');
 
@@ -106,10 +108,24 @@ const MsToString = (milliseconds) => {
     const timeString = timeUnits
         .filter(timeUnit => timeUnit.value > 0)
         .map(timeUnit => `${timeUnit.value}${timeUnit.unit}`)
-        .join(', ');
+        .join(seperator);
 
     return timeString;
 };
+
+/**
+ * Get the milliseconds timestamp of the next day.
+ * @param {number} [dayOffset=1] - The number of days to calculate the timestamp for.
+ * @returns {number} - The milliseconds timestamp of the next day.
+ */
+function theNextDayOn(dayOffset = 1) {
+    const nextDay = moment().add(dayOffset, 'day').startOf('day');
+    return nextDay.valueOf();
+}
+
+
+
+
 /**
  * Abbreviates a large number with a letter suffix
  * @param {number|string} num - The number to abbreviate
@@ -134,29 +150,31 @@ const abbrev = (num) => {
     }
     return `${num}`;
 };
-/**
- * Draws a circle on a canvas
- * @param {CanvasRenderingContext2D} ctx - The canvas rendering context
- * @param {number} w - The width of the canvas
- * @param {number} h - The height of the canvas
- * @returns {void}
- * @throws {Error} - If the context or canvas dimensions are invalid
- */
 
-const circle = (ctx, w, h) => {
-    if (!ctx) {
-        throw new Error('Context is required');
+/**
+ * Draws a circular clip path on the canvas context.
+ *
+ * @param {CanvasRenderingContext2D} ctx - The canvas rendering context to draw on.
+ * @param {number} x - The x-coordinate of the center of the circle.
+ * @param {number} y - The y-coordinate of the center of the circle.
+ * @param {number} width - The width of the clipping region.
+ * @param {number} height - The height of the clipping region.
+ * @throws {Error} Missing canvas context or invalid argument types.
+ */
+function circle(ctx, x, y, width, height) {
+    if (!ctx) throw new Error("Missing canvas context!");
+    if (typeof x !== "number" || typeof y !== "number" ||
+        typeof width !== "number" || typeof height !== "number") {
+        throw new Error(`Expected arguments to be numbers, received ${typeof x}, ${typeof y}, ${typeof width}, ${typeof height}`);
     }
-    if (!w || isNaN(w) || !h || isNaN(h)) {
-        throw new Error('Invalid canvas dimensions');
-    }
-    ctx.globalCompositeOperation = "destination-in";
+
+    const radius = Math.min(width, height) / 2;
     ctx.beginPath();
-    ctx.arc(w / 2, h / 2, h / 2, 0, Math.PI * 2);
+    ctx.arc(x + radius, y + radius, radius, 0, 2 * Math.PI);
     ctx.closePath();
-    ctx.fill();
-    return ctx;
-};
+    ctx.clip();
+}
+
 
 /**
  * Draws a rectangle on a canvas context.
@@ -219,15 +237,15 @@ const round = (ctx, x, y, width, height, radius) => {
     ctx.beginPath();
     ctx.moveTo(x + radius, y);
     ctx.lineTo(x + width - radius, y);
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+    ctx.arcTo(x + width, y, x + width, y + radius, radius);
     ctx.lineTo(x + width, y + height - radius);
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+    ctx.arcTo(x + width, y + height, x + width - radius, y + height, radius);
     ctx.lineTo(x + radius, y + height);
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+    ctx.arcTo(x, y + height, x, y + height - radius, radius);
     ctx.lineTo(x, y + radius);
-    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.arcTo(x, y, x + radius, y, radius);
     ctx.closePath();
-    ctx.fill();
+    ctx.clip();
 
     return ctx;
 };
@@ -583,6 +601,43 @@ function mergeObjects(...objects) {
         return merged;
     }, {});
 }
+
+/**
+ * Checks if an array includes at least one item of another array.
+ *
+ * @param {Array} array1 - The first array to check.
+ * @param {Array} array2 - The second array to check.
+ * @returns {Boolean} - True if array2 includes at least one item from array1, false otherwise.
+ * @throws {TypeError} - If either parameter is not an array.
+ */
+function includesArray(array1, array2) {
+    if (!Array.isArray(array1) || !Array.isArray(array2)) {
+        throw new TypeError('Both parameters must be arrays.');
+    }
+
+    return array2.some(item => array1.includes(item));
+}
+
+/**
+ * Calculates the progress made towards a goal, given the current progress.
+ * 
+ * @param {number} current - The current progress towards the goal.
+ * @param {number} goal - The required progress towards the goal.
+ * @returns {number} The progress made towards the goal, as a percentage between 0 and 1.
+ * @throws {Error} Will throw an error if the current or goal values are not numbers or are negative.
+ */
+function calculateProgress(current, goal) {
+    if (typeof current !== 'number' || current < 0) {
+        throw new Error('Current progress must be a positive number.');
+    }
+
+    if (typeof goal !== 'number' || goal <= 0) {
+        throw new Error('Goal progress must be a positive number and greater than 0.');
+    }
+    return current / goal;
+}
+
+
 module.exports = {
     canvas: {
         circle,
@@ -592,10 +647,13 @@ module.exports = {
     format: {
         abbrev,
         shorten,
-        StringToMs,
-        MsToString,
         formatHex,
         validateHex
+    },
+    time: {
+        StringToMs,
+        MsToString,
+        theNextDayOn,
     },
     utils: {
         shuffle,
@@ -607,6 +665,7 @@ module.exports = {
         isPalindrome,
         randomInRange,
         arrayAverage,
+        calculateProgress,
         extract,
         getAverage,
         normalizeValues,
@@ -614,6 +673,7 @@ module.exports = {
         flattenObject,
         chunkArray,
         mergeObjects,
+        includesArray,
         gamble
     },
 };
