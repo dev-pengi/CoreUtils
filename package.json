@@ -4,7 +4,8 @@
   "description": "CoreUtils is a powerful JavaScript utility library that provides a wide range of functions to simplify common programming tasks.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx mocha index.test.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,10 @@
   },
   "homepage": "https://github.com/dev-pengi/CoreUtils#readme",
   "dependencies": {
+    "assert": "^2.0.0",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0"
   }
 }
