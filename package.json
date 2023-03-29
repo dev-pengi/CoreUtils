@@ -1,6 +1,6 @@
 {
   "name": "utils-core.js",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "CoreUtils is a powerful JavaScript utility library that provides a wide range of functions to simplify common programming tasks.",
   "main": "index.js",
   "scripts": {
