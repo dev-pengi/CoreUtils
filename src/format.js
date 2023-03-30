@@ -53,8 +53,12 @@ const shorten = (text, len) => {
  * @throws {Error} If `hex` is not a string or `alt` is not a string.
  */
 const formatHex = (hex, alt = "#000000") => {
-    if (!hex || typeof hex !== "string") {
+    if (typeof hex !== 'string') {
         throw new Error(`Expected a string value for 'hex', but received ${typeof hex}`);
+    }
+
+    if (typeof alt !== 'string') {
+        throw new Error(`Expected a string value for 'alt', but received ${typeof alt}`);
     }
 
     hex = hex.replace("#", "");
