@@ -92,6 +92,49 @@ const validateHex = (hex) => {
     return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex);
 }
 
+/**
+* Reverses a string.
+* @param {string} str - The string to reverse.
+* @returns {string} The reversed string.
+* @throws {Error} Argument must be a string.
+*/
+
+const reverseString = (str) => {
+    if (typeof str !== 'string') {
+        throw new Error('Argument must be a string');
+    }
+    return str.split('').reverse().join('');
+};
+
+/**
+ * Determines whether a string is a palindrome.
+ * @param {string} str - The string to check.
+ * @returns {boolean} True if the string is a palindrome, false otherwise.
+ * @throws {Error} Argument must be a string.
+ */
+
+const isPalindrome = (str) => {
+    if (typeof str !== 'string') {
+        throw new Error('Argument must be a string');
+    }
+    const cleanStr = str.toLowerCase().replace(/[\W_]/g, '');
+    return cleanStr === cleanStr.split('').reverse().join('');
+};
+
+
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} str - The string to be capitalized.
+ * @returns {string} - The capitalized string.
+ * @throws Will throw an error if 'str' is not a string.
+ */
+const capitalize = (str) => {
+    if (typeof str !== 'string') {
+        throw new Error('Invalid input. Argument must be a string');
+    }
+
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
 
 
 module.exports = {
@@ -99,4 +142,7 @@ module.exports = {
     shorten,
     formatHex,
     validateHex,
+    reverseString,
+    isPalindrome,
+    capitalize,
 }
