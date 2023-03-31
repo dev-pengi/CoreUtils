@@ -2,68 +2,76 @@ const assert = require('assert');
 const mocha = require('mocha');
 const npmPackage = require('./index');
 
-describe('npm-package', function() {
-  describe('canvas', function() {
-    it('should have circle, round, and drawRect functions', function() {
+describe('npm-package', function () {
+  describe('canvas', function () {
+    it('should have circle, round, and drawRect functions', function () {
       assert.ok(npmPackage.canvas.circle);
       assert.ok(npmPackage.canvas.round);
       assert.ok(npmPackage.canvas.drawRect);
     });
   });
 
-  describe('format', function() {
-    it('should have abbrev, shorten, formatHex, and validateHex functions', function() {
+  describe('format', function () {
+    it('should have abbrev, shorten, formatHex, and validateHex functions', function () {
       assert.ok(npmPackage.format.abbrev);
       assert.ok(npmPackage.format.shorten);
       assert.ok(npmPackage.format.formatHex);
       assert.ok(npmPackage.format.validateHex);
     });
+
+    it('should have capitalize, reverseString, and reverseString functions', function () {
+      assert.ok(npmPackage.format.capitalize);
+      assert.ok(npmPackage.format.reverseString);
+      assert.ok(npmPackage.format.isPalindrome);
+    });
   });
 
-  describe('time', function() {
-    it('should have StringToMs, MsToString, and theNextDayOn functions', function() {
+
+  describe('time', function () {
+    it('should have StringToMs, MsToString, and theNextDayOn functions', function () {
       assert.ok(npmPackage.time.StringToMs);
       assert.ok(npmPackage.time.MsToString);
       assert.ok(npmPackage.time.theNextDayOn);
     });
   });
 
-  describe('utils', function() {
-    it('should have shuffle, clamp, capitalize, and countOccurrences functions', function() {
-      assert.ok(npmPackage.utils.shuffle);
-      assert.ok(npmPackage.utils.clamp);
-      assert.ok(npmPackage.utils.capitalize);
-      assert.ok(npmPackage.utils.countOccurrences);
+  describe('arrays', function () {
+    it('should have unique, includesArray, extract, and chunkArray functions', function () {
+      assert.ok(npmPackage.arrays.unique);
+      assert.ok(npmPackage.arrays.includesArray);
+      assert.ok(npmPackage.arrays.chunkArray);
+      assert.ok(npmPackage.arrays.extract);
+      assert.ok(npmPackage.arrays.shuffle);
+      assert.ok(npmPackage.arrays.countOccurrences);
     });
+  })
 
-    it('should have unique, reverseString, and isPalindrome functions', function() {
-      assert.ok(npmPackage.utils.unique);
-      assert.ok(npmPackage.utils.reverseString);
-      assert.ok(npmPackage.utils.isPalindrome);
+  describe('math', function () {
+    it('should have calculateProgress and clamp functions', function () {
+      assert.ok(npmPackage.math.calculateProgress);
+      assert.ok(npmPackage.math.clamp);
     });
+    describe('math', function () {
+      it('should have getAverageand normalizeValues functions', function () {
+        assert.ok(npmPackage.math.getAverage);
+        assert.ok(npmPackage.math.normalizeValues);
+      });
+    })
+  })
 
-    it('should have randomInRange, arrayAverage, and calculateProgress functions', function() {
-      assert.ok(npmPackage.utils.randomInRange);
-      assert.ok(npmPackage.utils.arrayAverage);
-      assert.ok(npmPackage.utils.calculateProgress);
+  describe('random', function () {
+    it('should have randomInRange, getRandomItem, and gamble functions', function () {
+      assert.ok(npmPackage.random.randomInRange);
+      assert.ok(npmPackage.random.getRandomItem);
+      assert.ok(npmPackage.random.gamble);
     });
+  })
 
-    it('should have extract, getAverage, and normalizeValues functions', function() {
-      assert.ok(npmPackage.utils.extract);
-      assert.ok(npmPackage.utils.getAverage);
-      assert.ok(npmPackage.utils.normalizeValues);
-    });
+  describe('objects', function () {
+    it('should have flattenObject and mergeObjects functions', function () {
+      assert.ok(npmPackage.objects.flattenObject);
+      assert.ok(npmPackage.objects.mergeObjects);
+    })
+  })
 
-    it('should have getRandomItem, flattenObject, and chunkArray functions', function() {
-      assert.ok(npmPackage.utils.getRandomItem);
-      assert.ok(npmPackage.utils.flattenObject);
-      assert.ok(npmPackage.utils.chunkArray);
-    });
-
-    it('should have mergeObjects, includesArray, and gamble functions', function() {
-      assert.ok(npmPackage.utils.mergeObjects);
-      assert.ok(npmPackage.utils.includesArray);
-      assert.ok(npmPackage.utils.gamble);
-    });
-  });
 });
