@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 /**
  * Generates a random number within a given range.
  * @param {number} min - The minimum value of the range.
@@ -44,9 +45,84 @@ const getRandomItem = (arr) => {
 
     return arr[Math.floor(Math.random() * arr.length)];
 };
+/**
+ * Generate a random string with customizable options.
+ * @param {Object} options - The options for generating the random string.
+ * @param {boolean} [options.includeNumbers=true] - Whether to include numbers in the generated string.
+ * @param {boolean} [options.includeSymbols=false] - Whether to include symbols in the generated string.
+ * @param {number} [options.length=10] - The length of the generated string.
+ * @param {boolean} [options.secure=false] - Whether to use cryptographically secure random number generator.
+ * @param {string} [options.prefix=''] - A prefix to add to the beginning of the generated string.
+ * @param {string} [options.suffix=''] - A suffix to add to the end of the generated string.
+ * @param {boolean} [options.capitalize=false] - Whether to capitalize the first character of the generated string.
+ * @param {boolean} [options.lowercase=false] - Whether to convert the generated string to lowercase.
+ * @param {boolean} [options.uppercase=false] - Whether to convert the generated string to uppercase.
+ * @throws {Error} If an invalid option is passed.
+ * @returns {string} The generated random string.
+ */
+function generateRandomString(options = {}) {
+    const {
+        includeNumbers = true,
+        includeSymbols = false,
+        length = 10,
+        secure = false,
+        prefix = '',
+        suffix = '',
+        capitalize = false,
+        lowercase = false,
+        uppercase = false
+    } = options;
+
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (includeNumbers) {
+        chars += '0123456789';
+    }
+    if (includeSymbols) {
+        chars += '!@#$%^&*()_+~`|}{[]\\:;?><,./-=';
+    }
+
+    if (typeof length !== 'number' || length <= 0) {
+        throw new Error('Invalid length parameter.');
+    }
+
+    if (typeof chars !== 'string' || chars.length === 0) {
+        throw new Error('Invalid chars parameter.');
+    }
+
+    let result = '';
+    if (secure) {
+        const randomBytes = crypto.randomBytes(length);
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(randomBytes[i] % chars.length);
+        }
+    } else {
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+    }
+
+    if (prefix) {
+        result = prefix + result;
+    }
+    if (suffix) {
+        result = result + suffix;
+    }
+    if (capitalize) {
+        result = result.charAt(0).toUpperCase() + result.slice(1);
+    }
+    if (lowercase) {
+        result = result.toLowerCase();
+    }
+    if (uppercase) {
+        result = result.toUpperCase();
+    }
+
+    return result;
+}
 
 module.exports = {
     randomInRange,
     gamble,
     getRandomItem,
+    generateRandomString
 }
