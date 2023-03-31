@@ -101,13 +101,12 @@ function includesArray(array1, array2) {
 }
 
 
-describe('countOccurrences', () => {
-    it('should count the number of occurrences of a value in an array', () => {
-        const input = [1, 2, 3, 2, 4, 2, 5];
-        expect(utils.countOccurrences(input, 2)).to.equal(3);
-    });
 
-    it('should throw an error if input is not an array', () => {
-        expect(() => utils.countOccurrences('not an array', 2)).to.throw('First argument must be an array');
-    });
-});
+module.exports = {
+    includesArray,
+    chunkArray,
+    shuffle,
+    unique,
+    countOccurrences,
+    extract,
+};
