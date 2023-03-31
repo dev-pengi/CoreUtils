@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const random = require('../src/random');
- 
+
 
 
 describe('randomInRange', () => {
@@ -66,4 +66,68 @@ describe("getRandomItem", () => {
         const result = random.getRandomItem(arr);
         expect(result).to.be.oneOf(arr);
     });
+});
+
+
+describe('generateRandomString', () => {
+    it('generates a random string with default options', () => {
+        const result = random.generateRandomString();
+        expect(result).to.be.a('string').with.lengthOf(10);
+    });
+
+    it('generates a random string with custom length', () => {
+        const result = random.generateRandomString({ length: 20 });
+        expect(result).to.be.a('string').with.lengthOf(20);
+    });
+
+    it('generates a random string with numbers included', () => {
+        const result = random.generateRandomString({ includeNumbers: true });
+        expect(result).to.match(/[0-9]/);
+    });
+
+    it('generates a random string with symbols included', () => {
+        const result = random.generateRandomString({ includeSymbols: true });
+        expect(result).to.match(/[!@#$%^&*()_+~`|}{[\]\\:;?><,.\/-=]/);
+    });
+
+    it('generates a secure random string when secure is true', () => {
+        const result = random.generateRandomString({ secure: true });
+        expect(result).to.be.a('string').with.lengthOf(10);
+    });
+
+    it('throws an error when length is not a number', () => {
+        expect(() => random.generateRandomString({ length: 'invalid' })).to.throw('Invalid length parameter.');
+    });
+
+    it('throws an error when length is 0 or negative', () => {
+        expect(() => random.generateRandomString({ length: 0 })).to.throw('Invalid length parameter.');
+        expect(() => random.generateRandomString({ length: -10 })).to.throw('Invalid length parameter.');
+    });
+
+
+    it('generates a random string with prefix and suffix options', () => {
+        const prefix = 'pre_';
+        const suffix = '_suf';
+        const result = random.generateRandomString({ prefix, suffix });
+        expect(result.startsWith(prefix)).to.be.true;
+        expect(result.endsWith(suffix)).to.be.true;
+    });
+
+    it('generates a random string with capitalized option', () => {
+        const result = random.generateRandomString({ capitalize: true });
+        expect(result[0]).to.equal(result[0].toUpperCase());
+    });
+
+    it('generates a random string with lowercase option', () => {
+        const result = random.generateRandomString({ lowercase: true });
+        expect(result).to.equal(result.toLowerCase());
+    });
+
+    it('generates a random string with uppercase option', () => {
+        const result = random.generateRandomString({ uppercase: true });
+        expect(result).to.equal(result.toUpperCase());
+    });
+
+
+
 });
