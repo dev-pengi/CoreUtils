@@ -1,4 +1,3 @@
-const moment = require('moment')
 
 /**
  * Converts a time string to milliseconds
@@ -120,8 +119,10 @@ const MsToString = (milliseconds, seperator = ', ') => {
  * @returns {number} - The milliseconds timestamp of the next day.
  */
 function theNextDayOn(dayOffset = 1) {
-    const nextDay = moment().add(dayOffset, 'day').startOf('day');
-    return nextDay.valueOf();
+    const nextDay = new Date();
+    nextDay.setDate(nextDay.getDate() + dayOffset);
+    nextDay.setHours(0, 0, 0, 0);
+    return nextDay.getTime();
 }
 
 
