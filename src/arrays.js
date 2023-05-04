@@ -76,7 +76,7 @@ const shuffle = (arr) => {
  * @param {number} size The size of each chunk.
  * @returns {Array} An array of chunks.
  */
-function chunkArray(arr, size) {
+function chunk(arr, size) {
     const result = [];
     for (let i = 0; i < arr.length; i += size) {
         result.push(arr.slice(i, i + size));
@@ -104,7 +104,7 @@ function includesArray(array1, array2) {
 
 module.exports = {
     includesArray,
-    chunkArray,
+    chunk,
     shuffle,
     unique,
     countOccurrences,

@@ -36,10 +36,10 @@ describe('npm-package', function () {
   });
 
   describe('arrays', function () {
-    it('should have unique, includesArray, extract, and chunkArray functions', function () {
+    it('should have unique, includesArray, extract, and chunk functions', function () {
       assert.ok(npmPackage.arrays.unique);
       assert.ok(npmPackage.arrays.includesArray);
-      assert.ok(npmPackage.arrays.chunkArray);
+      assert.ok(npmPackage.arrays.chunk);
       assert.ok(npmPackage.arrays.extract);
       assert.ok(npmPackage.arrays.shuffle);
       assert.ok(npmPackage.arrays.countOccurrences);

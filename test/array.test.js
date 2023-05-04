@@ -41,20 +41,20 @@ describe("chunkArray", () => {
         const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         const size = 3;
         const expected = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-        expect(arrays.chunkArray(arr, size)).to.deep.equal(expected);
+        expect(arrays.chunk(arr, size)).to.deep.equal(expected);
     });
 
     it("should handle an empty array", () => {
         const arr = [];
         const size = 3;
-        expect(arrays.chunkArray(arr, size)).to.deep.equal([]);
+        expect(arrays.chunk(arr, size)).to.deep.equal([]);
     });
 
     it("should handle a size greater than the array length", () => {
         const arr = [1, 2, 3];
         const size = 5;
         const expected = [[1, 2, 3]];
-        expect(arrays.chunkArray(arr, size)).to.deep.equal(expected);
+        expect(arrays.chunk(arr, size)).to.deep.equal(expected);
     });
 });
 
