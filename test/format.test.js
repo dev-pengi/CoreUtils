@@ -1,4 +1,4 @@
-const format = require('../src/format');
+const format = require('../lib');
 const expect = require('chai').expect;
 
 describe('abbrev', () => {

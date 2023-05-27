@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const objects = require('../src/objects');
+const objects = require('../lib');
 
 describe("flattenObject", () => {
     it("should flatten an object with nested properties into a flat object with path keys", () => {

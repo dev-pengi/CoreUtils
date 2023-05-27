@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const arrays = require('../src/arrays');
+const arrays = require('../lib');
 
 describe('shuffle', () => {
     it('should shuffle an array', () => {

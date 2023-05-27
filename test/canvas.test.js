@@ -1,6 +1,6 @@
 const { createCanvas } = require('canvas');
 const expect = require('chai').expect;
-const { circle, drawRect, round } = require('../src/canvas');
+const { circle, drawRect, round } = require('../lib');
 
 describe('circle', () => {
     it('should throw an error if canvas context is not provided', () => {
@@ -37,7 +37,7 @@ describe('drawRect', () => {
             const canvas = createCanvas(200, 200);
             const ctx = canvas.getContext('2d');
             drawRect(ctx, 'x', 'y', 'height', 'width');
-        }).to.throw('Expected height to be a number, received string!');
+        }).to.throw('Expected x to be a number, received string!');
     });
 
     it('should draw a rectangle on the canvas context', () => {

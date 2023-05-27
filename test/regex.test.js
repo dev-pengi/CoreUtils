@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { match } = require('../src/regex');
+const { match } = require('../lib');
 
 describe('match', () => {
 

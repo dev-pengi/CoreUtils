@@ -17,7 +17,7 @@ const regexs = [
     },
     {
         type: 'postal-code',
-        regex: /^\\d{5}(?:[-\\s]\\d{4})?$/y
+        regex: /^\d{5}(?:[-\s]\d{4})?$/y
     },
     {
         type: 'password',
@@ -38,28 +38,25 @@ const regexs = [
 ];
 
 
-/**
- * @typedef {'email' | 'phone' | 'url' | 'credit-card' | 'postal-code'  | 'password'  | 'username'  | 'date'  | 'time' | 'hashtag' }  RegexType
- */
+type RegexType = 'email' | 'phone' | 'url' | 'credit-card' | 'postal-code' | 'password' | 'username' | 'date' | 'time' | 'hashtag'
 
 /**
  * Checks if a string matches a regular expression of a specified type.
  *
- * @param {String} str - The string to match.
+ * @param {string} str - The string to match.
  * @param {RegexType} type - The type of regular expression to match against.
- * @returns {Boolean} - `true` if the entire string matches the regular expression, `false` otherwise.
+ * @returns {boolean} - `true` if the entire string matches the regular expression, `false` otherwise.
  * @throws {Error} - If the `type` argument is not one of the types specified in the `regexs` array.
  */
-const match = (str, type) => {
-    /** @type {{ type: string, regex: string }[]} */
+const match = (str: string, type: RegexType): boolean => {
     const regex = regexs.find(r => r.type === type);
     if (!regex) {
-      throw new Error(`Invalid type ${type}`);
+        throw new Error(`Invalid type ${type}`);
     }
     const regexObj = new RegExp(regex.regex, 'y');
     return regexObj.test(str);
-  }
-
-module.exports = {
-    match
 }
+
+export {
+    match
+};

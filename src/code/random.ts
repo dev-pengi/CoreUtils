@@ -1,4 +1,5 @@
-const crypto = require('crypto');
+import * as crypto from 'crypto';
+
 /**
  * Generates a random number within a given range.
  * @param {number} min - The minimum value of the range.
@@ -6,8 +7,7 @@ const crypto = require('crypto');
  * @returns {number} A random number within the given range.
  * @throws {Error} Both arguments must be numbers. The maximum value must be greater than the minimum value.
  */
-
-const randomInRange = (min, max) => {
+const randomInRange = (min: number, max: number): number => {
     if (typeof min !== 'number' || typeof max !== 'number') {
         throw new Error('Both arguments must be numbers.');
     }
@@ -24,7 +24,7 @@ const randomInRange = (min, max) => {
  * @returns {boolean} True if the player wins, false otherwise.
  * @throws {Error} Invalid percentage value.
  */
-const gamble = (percentage) => {
+const gamble = (percentage: number): boolean => {
     if (percentage < 0 || percentage > 100) {
         throw new Error('Invalid percentage value');
     }
@@ -38,13 +38,14 @@ const gamble = (percentage) => {
 * @returns {*} A random item from the input array
 * @throws {Error} If the input is not an array or if the array is empty
 */
-const getRandomItem = (arr) => {
+const getRandomItem = <T>(arr: T[]): T => {
     if (!Array.isArray(arr) || arr.length === 0) {
         throw new Error("Input must be a non empty array");
     }
 
     return arr[Math.floor(Math.random() * arr.length)];
 };
+
 /**
  * Generate a random string with customizable options.
  * @param {Object} options - The options for generating the random string.
@@ -60,7 +61,17 @@ const getRandomItem = (arr) => {
  * @throws {Error} If an invalid option is passed.
  * @returns {string} The generated random string.
  */
-function generateRandomString(options = {}) {
+function generateRandomString(options: {
+    includeNumbers?: boolean,
+    includeSymbols?: boolean,
+    length?: number,
+    secure?: boolean,
+    prefix?: string,
+    suffix?: string,
+    capitalize?: boolean,
+    lowercase?: boolean,
+    uppercase?: boolean
+} = {}): string {
     const {
         includeNumbers = true,
         includeSymbols = false,
@@ -120,9 +131,9 @@ function generateRandomString(options = {}) {
     return result;
 }
 
-module.exports = {
+export {
     randomInRange,
     gamble,
     getRandomItem,
     generateRandomString
-}
+};

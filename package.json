@@ -1,10 +1,13 @@
 {
   "name": "utils-core.js",
-  "version": "1.4.0",
+  "version": "2.0.1",
   "description": "CoreUtils is a powerful JavaScript utility library that provides a wide range of functions to simplify common programming tasks.",
   "main": "index.js",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "test": "npx mocha index.test.js && npx mocha",
+    "test": "tsc && npx mocha index.test.js && npx mocha",
     "start": "node index.js"
   },
   "repository": {
@@ -38,11 +41,12 @@
   "homepage": "https://github.com/dev-pengi/CoreUtils#readme",
   "dependencies": {
     "assert": "^2.0.0",
-    "canvas": "^2.11.0",
-    "crypto": "^1.0.1"
+    "canvas": "^2.11.0"
   },
   "devDependencies": {
+    "@types/node": "^20.2.5",
     "chai": "^4.3.7",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
   }
 }

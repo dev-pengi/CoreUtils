@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const random = require('../src/random');
+const random = require('../lib');
 
 
 

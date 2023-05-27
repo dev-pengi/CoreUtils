@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const math = require('../src/math');
+const math = require('../lib');
 
 describe('clamp', () => {
     it('should clamp a value between a minimum and maximum value', () => {
