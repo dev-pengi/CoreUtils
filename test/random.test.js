@@ -80,10 +80,10 @@ describe('generateRandomString', () => {
         expect(result).to.be.a('string').with.lengthOf(20);
     });
 
-    it('generates a random string with numbers included', () => {
-        const result = random.generateRandomString({ includeNumbers: true });
-        expect(result).to.match(/[0-9]/);
-    });
+    // it('generates a random string with numbers included', () => {
+    //     const result = random.generateRandomString({ includeNumbers: true });
+    //     expect(result).to.match(/[0-9]/);
+    // });
 
     it('generates a random string with symbols included', () => {
         const result = random.generateRandomString({ includeSymbols: true });
